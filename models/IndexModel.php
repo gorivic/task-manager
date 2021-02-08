@@ -4,7 +4,10 @@ class IndexModel extends Model {
 
 	public function getTaskList($page = 0, $itemPerPage = 3) {
         $from = $page * $itemPerPage;
-        $sql = "SELECT * FROM `tasks` LIMIT $from, $itemPerPage;";
+        $order = isset($_SESSION['orderField']) && $_SESSION['orderField'] != '' ? 
+            "ORDER BY `". $_SESSION['orderField'] ."` " . ($_SESSION['orderAD'] ? 'ASC' : 'DESC') :
+            '';
+        $sql = "SELECT * FROM `tasks` $order LIMIT $from, $itemPerPage;";
         return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 

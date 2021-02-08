@@ -45,6 +45,8 @@ class IndexController extends Controller {
 
 	public function logout() {
 		$_SESSION['loginOk'] = false;
+		unset($_SESSION['orderAD']);
+		unset($_SESSION['orderField']);
 		echo '1';
 	}
 
@@ -87,6 +89,24 @@ class IndexController extends Controller {
 		}
 
 		echo json_encode($response);
+	}
+
+	public function orderChange() {
+		$fieldName = $_POST['fieldName'];
+		if (isset($_SESSION['orderField']) && $_SESSION['orderField'] == $fieldName)
+			$_SESSION['orderAD'] = !$_SESSION['orderAD'];
+		else {
+			$_SESSION['orderAD'] = true;
+		}
+		$_SESSION['orderField'] = $fieldName;
+	}
+
+	public static function getOrderBtn($fieldName) {
+		$style = isset($_SESSION['orderField']) && $_SESSION['orderField'] == $fieldName ? 'btn-outline-info' : 'btn-outline-light';
+		$icon = $_SESSION['orderAD'] ? 'chevron-down' : 'chevron-up';
+
+		$html = '<button type="button" class="btn '. $style .' btn-sm orderChange" data-name="'. $fieldName .'"><i data-feather="'. $icon .'"></i></button>';
+		return $html;
 	}
 
 }

@@ -1,3 +1,6 @@
+<?php 
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,10 +50,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Выполнено</th>
-                    <th scope="col">Исполнитель</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Задание</th>
+                    <th scope="col">Выполнено <?= IndexController::getOrderBtn('t_done') ?></th>
+                    <th scope="col">Исполнитель <?= IndexController::getOrderBtn('t_username') ?></th>
+                    <th scope="col">E-mail <?= IndexController::getOrderBtn('t_email') ?></th>
+                    <th scope="col">Задание <?= IndexController::getOrderBtn('t_text') ?></th>
                     <th scope="col">Ред.</th>
                 </tr>
             </thead>

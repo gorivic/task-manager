@@ -9,6 +9,13 @@ $(document).on('hidden.bs.modal', '#taskModal', function () {
     $('.taskBody').empty();
 });
 
+$(document).on('click', '.orderChange', function () {console.log($(this).data('name'))
+    $.post('?modal=orderChange', {'fieldName': $(this).data('name')}, function (response) {
+        console.log(response)
+        window.location.reload();
+    });
+});
+
 $(document).on( 'click', '.saveForm', function () {
     var modal = $('.modal.show');
     var error_div = modal.find('.error_msg');
@@ -61,4 +68,4 @@ function checkIsEmpty(item) {
     }
 }
 
-feather.replace( )
+feather.replace()
