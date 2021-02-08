@@ -5,10 +5,10 @@
 */
 class DB {
 
-	const USER = "taskmanagervic";
-	const PASS = "qazXSWedc123";
+	const USER = "";
+	const PASS = "";
 	const HOST = "localhost";
-	const DB   = "task_manager_vic";
+	const DB   = "";
 
 	public static function connToDB() {
 
