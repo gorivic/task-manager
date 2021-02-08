@@ -111,11 +111,11 @@
                         <div class="col-6">
                             <div class="alert alert-danger error_msg visually-hidden" role="alert"></div>
                         </div>
-                        <div class="col modalActBtn">
-                            <button type="submit" class="btn btn-primary saveForm">Сохранить</button>
+                        <div class="col-3 p-0 modalActBtn">
+                            <button type="submit" class="btn btn-primary float-end saveForm">Сохранить</button>
                         </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <div class="col-3 p-0">
+                            <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">Отмена</button>
                         </div>
                     </div>
                 </div>

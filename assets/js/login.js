@@ -1,7 +1,7 @@
 $(document).on('click', '.tryToLogin', function () {
     $.post('?modal=login', {}, function (response) {
         $('.taskBody').html(response);
-        $('.modalActBtn').html('<button type="submit" class="btn btn-primary actLoginForm">Войти</button>');
+        $('.modalActBtn').html('<button type="submit" class="btn btn-primary float-end actLoginForm">Войти</button>');
     });
 });
 

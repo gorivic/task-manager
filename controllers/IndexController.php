@@ -103,7 +103,7 @@ class IndexController extends Controller {
 
 	public static function getOrderBtn($fieldName) {
 		$style = isset($_SESSION['orderField']) && $_SESSION['orderField'] == $fieldName ? 'btn-outline-info' : 'btn-outline-light';
-		$icon = $_SESSION['orderAD'] ? 'chevron-down' : 'chevron-up';
+		$icon = @$_SESSION['orderAD'] ? 'chevron-down' : 'chevron-up';
 
 		$html = '<button type="button" class="btn '. $style .' btn-sm orderChange" data-name="'. $fieldName .'"><i data-feather="'. $icon .'"></i></button>';
 		return $html;

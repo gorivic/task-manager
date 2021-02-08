@@ -1,7 +1,7 @@
 $(document).on('click', '.loadTask', function () {
     $.post('?modal=task', {'t_id': $(this).data('id')}, function (response) {
         $('.taskBody').html(response);
-        $('.modalActBtn').html('<button type="submit" class="btn btn-primary saveForm">Сохранить</button>');
+        $('.modalActBtn').html('<button type="submit" class="btn btn-primary float-end saveForm">Сохранить</button>');
     });
 });
 
