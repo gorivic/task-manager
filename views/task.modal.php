@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-sm">
-            <b>Исполнитель*</b> 
+            <b>Имя пользователя*</b> 
             <input type="text" name="t_username" id="t_username" class="form-control" value="<?= @$pageData['task']['t_username'] ?>" />
         </div>
     </div>
@@ -18,7 +18,7 @@
     <br />
     <div class="row">
         <div class="col-sm">
-            <b>Задание*</b>
+            <b>Текст задачи*</b>
             <input type="text" name="t_text" id="t_text" class="form-control" value="<?= @$pageData['task']['t_text'] ?>" />
         </div>
     </div>
@@ -29,7 +29,7 @@
             <div class="form-check" <?= @$pageData['task']['t_id'] > 0 ? '' : 'hidden' ?>>
                 <input class="form-check-input" type="checkbox" name="t_done" value="1" <?= @$pageData['task']['t_done'] ? 'checked' : '' ?> id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
-                    Выполнено
+                    Cтатус
                 </label>
             </div>
         </div>

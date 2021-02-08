@@ -63,7 +63,6 @@ class IndexModel extends Model {
 
     public function findUser($userName, $password) {
         $sql = "SELECT COUNT(*) FROM users WHERE users.u_name = '".$userName."' AND users.u_pass = '".$password."';";
-        // print_r($this->db->query($sql));
         return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC)[0]['COUNT(*)'];
     }
 	
