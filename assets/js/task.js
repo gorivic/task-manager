@@ -57,6 +57,27 @@ $(document).on( 'click', '.saveForm', function () {
     return false;
 } );
 
+$(document).on( 'change keydown paste input', '#t_email', function () {
+    if (!isEmail($(this).val())) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
+
+$(document).on( 'focusout', '#t_email', function () {
+    var modal = $('.modal.show');
+    var error_div = modal.find('.error_msg');
+
+    if (!isEmail($(this).val())) {
+        error_div.html( 'E-mail не валиден.' ).removeClass( 'visually-hidden' );
+        $(this).addClass('is-invalid');
+    } else {
+        error_div.addClass( 'visually-hidden' ).empty();
+        $(this).removeClass('is-invalid');
+    }
+});
+
 function checkIsEmpty(item) {
     if (item.val() === '') {
         isValid = false;
@@ -68,4 +89,15 @@ function checkIsEmpty(item) {
     }
 }
 
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
 feather.replace()
+
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+

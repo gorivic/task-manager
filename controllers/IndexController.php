@@ -63,7 +63,7 @@ class IndexController extends Controller {
 
 		if (!isset($_POST['t_username']) || $_POST['t_username'] == '') {
 			$response['ok'] = false;
-			$response['msg'][] = 'Введите имя исполнителя.';
+			$response['msg'][] = 'Введите имя пользователя.';
 		}
 
 		if (!isset($_POST['t_email']) || $_POST['t_email'] == '') {
@@ -76,16 +76,21 @@ class IndexController extends Controller {
 
 		if (!isset($_POST['t_text']) || $_POST['t_text'] == '') {
 			$response['ok'] = false;
-			$response['msg'][] = 'Введите текст задания.';
+			$response['msg'][] = 'Введите текст задачи.';
 		}
 
 		if ($response['ok']) {
 			if (isset($_POST['t_id']) && $_POST['t_id'] > 0) {
-				$done = isset($_POST['t_done']) ? $_POST['t_done'] : 0;
-				$this->model->updateTask($_POST['t_id'], $_POST['t_username'], $_POST['t_email'], $_POST['t_text'], $done);
+				if ($_SESSION['loginOk']) {
+					$done = isset($_POST['t_done']) ? $_POST['t_done'] : 0;
+					$this->model->updateTask($_POST['t_id'], htmlspecialchars($_POST['t_username']), htmlspecialchars($_POST['t_email']), htmlspecialchars($_POST['t_text']), $done);
+				} else {
+					$response['ok'] = false;
+					$response['msg'][] = 'Отказано в доступе.';
+				}
 			}
 			else
-				$this->model->setNewTask($_POST['t_username'], $_POST['t_email'], $_POST['t_text']);
+				$this->model->setNewTask(htmlspecialchars($_POST['t_username']), htmlspecialchars($_POST['t_email']), htmlspecialchars($_POST['t_text']));
 		}
 
 		echo json_encode($response);

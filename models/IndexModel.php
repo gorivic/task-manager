@@ -13,7 +13,7 @@ class IndexModel extends Model {
 
     public function getTaskCount() {
         $sql = "SELECT COUNT(*) FROM `tasks`;";
-        return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC)[0]['COUNT(*)'];
+        return $this->db->query($sql)->fetch(PDO::FETCH_ASSOC)['COUNT(*)'];
     }
 
     public function getTaskById($id) {
@@ -41,7 +41,9 @@ class IndexModel extends Model {
     }
 
     public function updateTask($tid, $userName, $email, $task, $done) {
-        $sql = "UPDATE `tasks` SET `t_username` = :userName, `t_email` = :email, `t_text` = :task, `t_done` = :done WHERE (`t_id` = :tid);";
+        $sql = "UPDATE `tasks` SET `t_username` = :userName, `t_email` = :email, `t_text` = :task, `t_done` = :done, `t_edited` = :edited WHERE (`t_id` = :tid);";
+
+        $edited = (int)($this->getTaskById($tid)['t_text'] != $task);
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':tid', $tid, PDO::PARAM_STR);
@@ -49,6 +51,7 @@ class IndexModel extends Model {
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->bindValue(':task', $task, PDO::PARAM_STR);
         $stmt->bindValue(':done', $done, PDO::PARAM_INT);
+        $stmt->bindValue(':edited', $edited, PDO::PARAM_INT);
 
         $responce['ok'] = true;
         $responce['msg'] = [];
@@ -63,7 +66,7 @@ class IndexModel extends Model {
 
     public function findUser($userName, $password) {
         $sql = "SELECT COUNT(*) FROM users WHERE users.u_name = '".$userName."' AND users.u_pass = '".$password."';";
-        return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC)[0]['COUNT(*)'];
+        return $this->db->query($sql)->fetch(PDO::FETCH_ASSOC)['COUNT(*)'];
     }
 	
 }

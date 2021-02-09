@@ -23,12 +23,12 @@
                         <span class="navbar-brand mb-0 h1">Задачник</span>
                     </div>
                     <div class="col-1">
-                        <?php if (isset($_SESSION['loginOk']) && $_SESSION['loginOk']): ?>
                         <button type="button" class="btn btn-success loadTask" data-bs-toggle="modal" data-bs-target="#taskModal">
                             <i data-feather="plus"></i>
                         </button>
                     </div>
                     <div class="col-1">
+                        <?php if (isset($_SESSION['loginOk']) && $_SESSION['loginOk']): ?>
                         <button type="button" class="btn btn-danger float-end logout">
                             Выйти
                         </button>
@@ -47,14 +47,16 @@
     <div class="container container-sm">
 
         <!-- Task list -->
-        <table class="table table-hover">
+        <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Cтатус <?= IndexController::getOrderBtn('t_done') ?></th>
                     <th scope="col">Имя пользователя <?= IndexController::getOrderBtn('t_username') ?></th>
                     <th scope="col">E-mail <?= IndexController::getOrderBtn('t_email') ?></th>
                     <th scope="col">Текст задачи <?= IndexController::getOrderBtn('t_text') ?></th>
-                    <th scope="col">Ред.</th>
+                    <?php if (isset($_SESSION['loginOk']) && $_SESSION['loginOk']): ?>
+                        <th scope="col">Ред.</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -68,16 +70,20 @@
                         <?= $task['t_done'] ?
                         '<span class="badge bg-success">Выполнено</span>' :
                         '<span class="badge bg-danger">Не выполнено</span>' ?>
+                        <?= $task['t_edited'] == 1 ? 
+                            '<br /><span class="badge bg-info">Отредактировано администратором</span>' : 
+                            '' ?>
                     </th>
                     <td><?= $task['t_username'] ?></td>
                     <td><?= $task['t_email'] ?></td>
                     <td><?= $task['t_text'] ?></td>
-                    <td> <?php if (isset($_SESSION['loginOk']) && $_SESSION['loginOk']): ?>
-                        <button type="button" data-id="<?= $task['t_id'] ?>" class="btn btn-light loadTask" data-bs-toggle="modal" data-bs-target="#taskModal">
-                        <i data-feather="edit-2"></i>
-                        </button>
-                        <?php endif; ?>
-                    </td>
+                    <?php if (isset($_SESSION['loginOk']) && $_SESSION['loginOk']): ?>
+                        <td> 
+                            <button type="button" data-id="<?= $task['t_id'] ?>" class="btn btn-light loadTask" data-bs-toggle="modal" data-bs-target="#taskModal">
+                            <i data-feather="edit-2"></i>
+                            </button>
+                        </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
